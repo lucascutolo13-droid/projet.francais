@@ -3,184 +3,176 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projet Français Futuriste</title>
+<title>Projet Futuriste</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
-
 /* RESET */
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron', sans-serif;scroll-behavior:smooth;}
-body{background:#0b0c1a;color:#a8cbd1;overflow-x:hidden;}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; scroll-behavior: smooth; }
+body { background: #0b0c1a; color: #a8cbd1; overflow-x: hidden; }
 
-/* FOND PARTICULES 3D */
-canvas#bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
+/* CANVAS PARTICULES */
+canvas#bgCanvas { position: fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
 
-/* NAVBAR HOLO */
-nav{
-position:fixed;top:0;width:100%;display:flex;justify-content:center;gap:30px;
-padding:20px;background:rgba(15,15,35,0.6);backdrop-filter:blur(12px);z-index:1000;
-transition:0.2s;
+/* NAVBAR */
+nav {
+  position: fixed; top: 0; width: 100%; display: flex; justify-content: center; gap: 30px;
+  padding: 20px; background: rgba(15,15,35,0.6); backdrop-filter: blur(12px); z-index: 1000;
+  transition: 0.2s;
 }
-nav a{color:#a8cbd1;font-weight:bold;transition:0.3s;}
-nav a:hover{color:#e0f7fa;transform:scale(1.05);}
+nav a { color: #a8cbd1; font-weight: bold; transition: 0.3s; }
+nav a:hover { color: #e0f7fa; transform: scale(1.05); }
 
-/* HEADER HOLO */
-header{
-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
-perspective:1000px;
+/* HEADER */
+header {
+  height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; perspective: 1000px;
 }
-header h1{
-font-size:4em;color:#a8cbd1;text-shadow:0 0 15px #a8cbd1,0 0 30px #7aa3b0;
-animation:float 4s infinite alternate ease-in-out;
+header h1 {
+  font-size: 4em; color: #a8cbd1; text-shadow: 0 0 15px #a8cbd1,0 0 30px #7aa3b0;
+  animation: float 4s infinite alternate ease-in-out;
 }
-header p{
-color:#cfe8eb;opacity:0.8;font-size:1.5em;text-shadow:0 0 8px #cfe8eb;
-animation:float 6s infinite alternate ease-in-out;
+header p {
+  color: #cfe8eb; opacity: 0.8; font-size: 1.5em; text-shadow: 0 0 8px #cfe8eb;
+  animation: float 6s infinite alternate ease-in-out;
 }
-@keyframes float{0%{transform:translateY(0px) rotateX(0deg);}50%{transform:translateY(-12px) rotateX(2deg);}100%{transform:translateY(0px) rotateX(0deg);}}
+@keyframes float { 0% { transform: translateY(0px) rotateX(0deg); } 50% { transform: translateY(-12px) rotateX(2deg); } 100% { transform: translateY(0px) rotateX(0deg); } }
 
-/* SECTIONS HOLO */
-section{
-background:rgba(255,255,255,0.04);margin:80px auto;padding:50px;width:80%;border-radius:20px;
-box-shadow:0 0 10px #a8cbd1,0 0 20px #7aa3b0;opacity:0;transform:translateY(80px) rotateX(20deg) rotateY(10deg);
-transition:1s;
+/* SECTIONS */
+section {
+  background: rgba(255,255,255,0.04); margin: 80px auto; padding: 50px; width: 80%; border-radius: 20px;
+  box-shadow: 0 0 10px #a8cbd1, 0 0 20px #7aa3b0; opacity: 0; transform: translateY(80px) rotateX(20deg) rotateY(10deg); transition: 1s;
 }
-section.visible{opacity:1;transform:translateY(0) rotateX(0) rotateY(0);}
-h2{font-size:2em;color:#a8cbd1;text-shadow:0 0 6px #a8cbd1;}
-blockquote{margin:20px 0;padding:20px;border-left:4px solid #7aa3b0;font-style:italic;color:#cfe8eb;}
+section.visible { opacity: 1; transform: translateY(0) rotateX(0) rotateY(0); }
+h2 { font-size: 2em; color: #a8cbd1; text-shadow: 0 0 6px #a8cbd1; }
+p { font-size: 1.2em; line-height: 1.6; }
+.holo-img {
+  display: block; margin: 20px auto; max-width: 90%; border-radius: 15px;
+  box-shadow: 0 0 15px rgba(168,203,209,0.6), 0 0 30px rgba(122,163,176,0.4);
+  opacity: 0; transform: translateY(40px); transition: 1s;
+}
+.holo-img.visible { opacity: 1; transform: translateY(0); }
 
-/* IMAGES HOLO */
-.holo-img{
-  display:block;
-  margin:20px auto;
-  max-width:90%;
-  border-radius:15px;
-  box-shadow:0 0 15px rgba(168,203,209,0.6),0 0 30px rgba(122,163,176,0.4);
-  opacity:0;
-  transform:translateY(40px);
-  transition:1s;
+/* BOUTON TOP */
+#topBtn {
+  position: fixed; bottom: 30px; right: 30px; background: #7aa3b0; border: none; padding: 15px; border-radius: 50%;
+  font-size: 20px; color: #0b0c1a; cursor: pointer; box-shadow: 0 0 10px #7aa3b0; display: none; transition: 0.3s;
 }
-.holo-img.visible{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* BOUTON TOP HOLO */
-#topBtn{position:fixed;bottom:30px;right:30px;background:#7aa3b0;border:none;padding:15px;border-radius:50%;font-size:20px;color:#0b0c1a;cursor:pointer;box-shadow:0 0 10px #7aa3b0;display:none;transition:0.3s;}
-#topBtn:hover{background:#a8cbd1;color:#0b0c1a;box-shadow:0 0 20px #a8cbd1;transform:scale(1.1);}
+#topBtn:hover { background: #a8cbd1; color: #0b0c1a; box-shadow: 0 0 20px #a8cbd1; transform: scale(1.1); }
 
 /* FOOTER */
-footer{text-align:center;padding:40px;color:#a8cbd1;letter-spacing:2px;}
+footer { text-align: center; padding: 40px; color: #a8cbd1; letter-spacing: 2px; }
 
-/* NEON COLOR ANIMATION (discret) */
-@keyframes neonGlow{
-0%{text-shadow:0 0 3px #a8cbd1,0 0 6px #7aa3b0;}
-50%{text-shadow:0 0 6px #a8cbd1,0 0 12px #7aa3b0;}
-100%{text-shadow:0 0 3px #a8cbd1,0 0 6px #7aa3b0;}
+/* NEON ANIMATION */
+@keyframes neonGlow {
+  0% { text-shadow: 0 0 3px #a8cbd1,0 0 6px #7aa3b0; }
+  50% { text-shadow: 0 0 6px #a8cbd1,0 0 12px #7aa3b0; }
+  100% { text-shadow: 0 0 3px #a8cbd1,0 0 6px #7aa3b0; }
 }
-h1,h2,blockquote{animation:neonGlow 4s infinite alternate;}
+h1,h2,blockquote { animation: neonGlow 4s infinite alternate; }
 
 </style>
 </head>
-
 <body>
 
 <canvas id="bgCanvas"></canvas>
 
 <nav>
-<a href="#intro">Intro</a>
-<a href="#arg1">Arg 1</a>
-<a href="#arg2">Arg 2</a>
-<a href="#conclusion">Conclusion</a>
+  <a href="#intro">Intro</a>
+  <a href="#arg1">Arg 1</a>
+  <a href="#arg2">Arg 2</a>
+  <a href="#conclusion">Conclusion</a>
 </nav>
 
 <header>
-<h1>Ma Problématique Futuriste</h1>
-<p>Projet interactif de français</p>
+  <h1>💎 Ma Présentation Futuriste 💎</h1>
+  <p>Un site interactif et stylé à mort</p>
 </header>
 
 <section id="intro">
-<h2>Introduction</h2>
-<p>Un site futuriste et élégant pour présenter la problématique.</p>
-<blockquote>“Le futur se construit avec les mots d’aujourd’hui.”</blockquote>
-<img src="images/intro.jpg" alt="Intro image" class="holo-img">
+  <h2>Introduction</h2>
+  <p>Bienvenue dans ce site futuriste, où chaque animation et image est pensée pour surprendre.</p>
+  <img src="images/intro.jpg" class="holo-img" alt="Intro">
 </section>
 
 <section id="arg1">
-<h2>Argument 1</h2>
-<p>Premier argument stylé avec image illustrative.</p>
-<img src="images/arg1.jpg" alt="Argument 1 image" class="holo-img">
+  <h2>Argument 1</h2>
+  <p>Premier argument illustré par une image holographique qui flotte doucement.</p>
+  <img src="images/arg1.jpg" class="holo-img" alt="Argument 1">
 </section>
 
 <section id="arg2">
-<h2>Argument 2</h2>
-<p>Deuxième argument avec exemples et illustration.</p>
-<img src="images/arg2.jpg" alt="Argument 2 image" class="holo-img">
+  <h2>Argument 2</h2>
+  <p>Deuxième argument avec un style immersif et moderne pour captiver le visiteur.</p>
+  <img src="images/arg2.jpg" class="holo-img" alt="Argument 2">
 </section>
 
 <section id="conclusion">
-<h2>Conclusion</h2>
-<p>Réponse à la problématique avec ouverture futuriste et élégante.</p>
-<img src="images/conclusion.jpg" alt="Conclusion image" class="holo-img">
+  <h2>Conclusion</h2>
+  <p>Réponse à la problématique avec un effet hologramme final et ouverture sur le futur.</p>
+  <img src="images/conclusion.jpg" class="holo-img" alt="Conclusion">
 </section>
 
 <footer>
-<p>Projet scolaire — 2026</p>
+  <p>Projet Futuriste — 2026</p>
 </footer>
 
 <button id="topBtn">↑</button>
 
 <script>
-// SCROLL SECTIONS & IMAGES
-const sections=document.querySelectorAll("section");
-const holoImages=document.querySelectorAll(".holo-img");
-window.addEventListener("scroll",()=>{
-sections.forEach(s=>{
-  const top=s.getBoundingClientRect().top;
-  if(top<window.innerHeight-100){s.classList.add("visible");}
+// Scroll animations
+const sections = document.querySelectorAll("section");
+const holoImages = document.querySelectorAll(".holo-img");
+window.addEventListener("scroll", () => {
+  sections.forEach(s => {
+    const top = s.getBoundingClientRect().top;
+    if (top < window.innerHeight - 100) s.classList.add("visible");
+  });
+  holoImages.forEach(img => {
+    const top = img.getBoundingClientRect().top;
+    if (top < window.innerHeight - 100) img.classList.add("visible");
+  });
+  // bouton top
+  document.getElementById("topBtn").style.display = window.scrollY > 400 ? "block" : "none";
 });
-holoImages.forEach(img=>{
-  const top=img.getBoundingClientRect().top;
-  if(top<window.innerHeight-100){img.classList.add("visible");}
-});
-// bouton top
-document.getElementById("topBtn").style.display=window.scrollY>400?"block":"none";
-document.getElementById("topBtn").onclick=()=>window.scrollTo({top:0,behavior:"smooth"});
-});
+document.getElementById("topBtn").onclick = () => window.scrollTo({top:0, behavior:"smooth"});
 
-// PARTICULES 3D HOLO
-const canvas=document.getElementById("bgCanvas");
-const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-const particles=[];
+// Particules 3D
+const canvas = document.getElementById("bgCanvas");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const particles = [];
 for(let i=0;i<150;i++){
-particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,z:Math.random()*500-250,r:Math.random()*1.5+0.5,dx:(Math.random()-0.5)*1.2,dy:(Math.random()-0.5)*1.2,dz:(Math.random()-0.5)*1.2});
+  particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,z:Math.random()*500-250,r:Math.random()*1.5+0.5,dx:(Math.random()-0.5)*1.2,dy:(Math.random()-0.5)*1.2,dz:(Math.random()-0.5)*1.2});
 }
+
 function draw(){
-ctx.fillStyle="rgba(11,12,26,0.2)";
-ctx.fillRect(0,0,canvas.width,canvas.height);
-particles.forEach(p=>{
-const scale=500/(500+p.z);
-const x=p.x*scale+canvas.width/2-canvas.width/2*scale;
-const y=p.y*scale+canvas.height/2-canvas.height/2*scale;
-ctx.beginPath();
-ctx.arc(x,y,p.r,0,Math.PI*2);
-ctx.fillStyle="#a8cbd1";ctx.fill();
-p.x+=p.dx;p.y+=p.dy;p.z+=p.dz;
-if(p.x<0||p.x>canvas.width)p.dx*=-1;
-if(p.y<0||p.y>canvas.height)p.dy*=-1;
-if(p.z<-250||p.z>250)p.dz*=-1;
-});
-requestAnimationFrame(draw);
+  ctx.fillStyle="rgba(11,12,26,0.2)";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    const scale = 500/(500+p.z);
+    const x = p.x*scale + canvas.width/2 - canvas.width/2*scale;
+    const y = p.y*scale + canvas.height/2 - canvas.height/2*scale;
+    ctx.beginPath();
+    ctx.arc(x,y,p.r,0,Math.PI*2);
+    ctx.fillStyle="#a8cbd1";
+    ctx.fill();
+    p.x+=p.dx; p.y+=p.dy; p.z+=p.dz;
+    if(p.x<0||p.x>canvas.width)p.dx*=-1;
+    if(p.y<0||p.y>canvas.height)p.dy*=-1;
+    if(p.z<-250||p.z>250)p.dz*=-1;
+  });
+  requestAnimationFrame(draw);
 }
 draw();
 
-// NAV PARALLAXE MOUSE
+// Navbar parallax
 document.addEventListener("mousemove",(e)=>{
-document.querySelector("nav").style.transform=`translateX(${(e.clientX-window.innerWidth/2)/50}px) translateY(${(e.clientY-window.innerHeight/2)/50}px)`;
+  document.querySelector("nav").style.transform=`translateX(${(e.clientX-window.innerWidth/2)/50}px) translateY(${(e.clientY-window.innerHeight/2)/50}px)`;
 });
-
 </script>
 
 </body>

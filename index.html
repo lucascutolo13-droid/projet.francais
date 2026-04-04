@@ -6,45 +6,36 @@
 <title>Projet Futuriste Immersif</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 <style>
-body, html { margin:0; padding:0; font-family:'Orbitron', sans-serif; overflow-x:hidden; background:#0b0c1a; color:#a8cbd1; }
+html, body { margin:0; padding:0; font-family:'Orbitron', sans-serif; background:#0b0c1a; color:#a8cbd1; overflow:hidden; }
 canvas#bgCanvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
 
-/* MENU */
-nav {
-  position: fixed; top: 0; width: 100%; display:flex; justify-content:center; gap:30px;
-  padding:20px; background: rgba(15,15,35,0.6); backdrop-filter: blur(12px); z-index:1000; transition:0.2s;
-}
+/* NAVBAR */
+nav { position: fixed; top:0; width:100%; display:flex; justify-content:center; gap:30px; padding:20px; background: rgba(15,15,35,0.6); backdrop-filter: blur(12px); z-index:1000; }
 nav a { color:#a8cbd1; font-weight:bold; transition:0.3s; }
 nav a:hover { color:#e0f7fa; transform:scale(1.1); }
 
-/* SECTION IMMERSIVE */
-header {
-  height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; perspective:1000px;
-  overflow:hidden;
+/* INTRO */
+#introScreen {
+  position:fixed; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; z-index:100;
 }
-header h1 {
-  font-size:5em; color:#a8cbd1; text-shadow:0 0 15px #a8cbd1,0 0 30px #7aa3b0; 
-  opacity:0; transform:translateY(50px) rotateX(20deg);
+#introScreen h1 {
+  font-size:5em; text-shadow:0 0 15px #a8cbd1,0 0 30px #7aa3b0; opacity:0; transform:translateY(50px);
   animation:slideIn 2s forwards 0.5s;
 }
-header p {
-  font-size:1.8em; opacity:0; transform:translateY(50px) rotateX(20deg);
+#introScreen p {
+  font-size:1.8em; opacity:0; transform:translateY(50px);
   animation:slideIn 2s forwards 1.5s;
 }
-header button {
-  margin-top:40px; padding:15px 40px; font-size:1.2em; border:none; border-radius:10px;
-  background:#7aa3b0; color:#0b0c1a; cursor:pointer; box-shadow:0 0 10px #7aa3b0;
-  opacity:0; transform:translateY(50px);
+#introScreen button {
+  margin-top:40px; padding:15px 40px; font-size:1.2em; border:none; border-radius:10px; background:#7aa3b0; color:#0b0c1a; cursor:pointer;
+  box-shadow:0 0 10px #7aa3b0; opacity:0; transform:translateY(50px);
   animation:slideIn 2s forwards 2.5s;
 }
-header button:hover { background:#a8cbd1; box-shadow:0 0 20px #a8cbd1; transform:scale(1.1); }
+#introScreen button:hover { background:#a8cbd1; box-shadow:0 0 20px #a8cbd1; transform:scale(1.1); }
 
-@keyframes slideIn {
-  0% { opacity:0; transform:translateY(50px) rotateX(20deg); }
-  100% { opacity:1; transform:translateY(0) rotateX(0deg); }
-}
+@keyframes slideIn { 0% {opacity:0; transform:translateY(50px);} 100% {opacity:1; transform:translateY(0);} }
 
-/* SECTIONS CLASSIQUES */
+/* SECTIONS */
 section { margin:100px auto; padding:50px; width:80%; border-radius:20px; background: rgba(255,255,255,0.05); box-shadow:0 0 10px #a8cbd1; opacity:0; transform:translateY(80px); transition:1s; }
 section.visible { opacity:1; transform:translateY(0); }
 h2 { font-size:2em; margin-bottom:20px; }
@@ -67,33 +58,33 @@ footer { text-align:center; padding:40px; color:#a8cbd1; letter-spacing:2px; }
   <a href="#conclusion">Conclusion</a>
 </nav>
 
-<header>
+<div id="introScreen">
   <h1>💎 Bienvenue dans le Futur 💎</h1>
-  <p>Un site interactif et immersif</p>
-  <button onclick="scrollToSection('intro')">Découvrir</button>
-</header>
+  <p>Un site immersif et interactif</p>
+  <button id="startBtn">Découvrir</button>
+</div>
 
 <section id="intro">
   <h2>Introduction</h2>
-  <p>Voici l'entrée dans notre univers futuriste, où chaque effet est pensé pour captiver.</p>
+  <p>Voici l'entrée dans notre univers futuriste.</p>
   <img src="images/intro.jpg" class="holo-img" alt="Intro">
 </section>
 
 <section id="arg1">
   <h2>Argument 1</h2>
-  <p>Premier argument illustré par une image holographique qui flotte.</p>
-  <img src="images/arg1.jpg" class="holo-img" alt="Argument 1">
+  <p>Premier argument holographique.</p>
+  <img src="images/arg1.jpg" class="holo-img" alt="Arg1">
 </section>
 
 <section id="arg2">
   <h2>Argument 2</h2>
-  <p>Deuxième argument avec un style immersif et moderne.</p>
-  <img src="images/arg2.jpg" class="holo-img" alt="Argument 2">
+  <p>Deuxième argument immersif.</p>
+  <img src="images/arg2.jpg" class="holo-img" alt="Arg2">
 </section>
 
 <section id="conclusion">
   <h2>Conclusion</h2>
-  <p>Réponse à la problématique avec un effet hologramme final et ouverture.</p>
+  <p>Conclusion avec effet hologramme.</p>
   <img src="images/conclusion.jpg" class="holo-img" alt="Conclusion">
 </section>
 
@@ -102,18 +93,25 @@ footer { text-align:center; padding:40px; color:#a8cbd1; letter-spacing:2px; }
 </footer>
 
 <script>
-// Scroll pour les sections
+// Désactiver le scroll au départ
+document.body.style.overflow = 'hidden';
+
+// Bouton Découvrir
+document.getElementById("startBtn").addEventListener("click", () => {
+  document.body.style.overflow = 'auto'; // autorise scroll
+  document.getElementById("introScreen").style.transition = "opacity 1s";
+  document.getElementById("introScreen").style.opacity = 0;
+  setTimeout(() => { document.getElementById("introScreen").style.display = "none"; }, 1000);
+  document.getElementById("intro").scrollIntoView({behavior:"smooth"});
+});
+
+// Scroll animations
 const sections = document.querySelectorAll("section");
 const holoImages = document.querySelectorAll(".holo-img");
 window.addEventListener("scroll", () => {
   sections.forEach(s => { if(s.getBoundingClientRect().top < window.innerHeight-100) s.classList.add("visible"); });
   holoImages.forEach(img => { if(img.getBoundingClientRect().top < window.innerHeight-100) img.classList.add("visible"); });
 });
-
-// Scroll button
-function scrollToSection(id){
-  document.getElementById(id).scrollIntoView({behavior:"smooth"});
-}
 
 // Particules futuristes
 const canvas = document.getElementById("bgCanvas");
